@@ -19,7 +19,7 @@ const App = () => {
         { path: '/jobs', element: <JobsPage isHome={false}/> },
         { path: '/add-job', element: <AddJobPage /> },
         { path: '/edit-job/:id', element: <EditJobPage /> },
-        { path: '/jobs/:id', element: <JobPage /> },
+        { path: '/get-job/:id', element: <JobPage /> },
         { path: '*', element: <NotFoundPage /> },
       ],
     },
