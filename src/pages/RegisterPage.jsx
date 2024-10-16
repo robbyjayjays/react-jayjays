@@ -9,43 +9,37 @@ const RegisterPage = () => {
     const navigate = useNavigate(); // Assuming you're using React Router for navigation
   
     const submitForm = async (e) => {
-      e.preventDefault();
-      
-      const registerData = {
-        email,
-        password,
-      };
-  
-      console.log(registerData); // For debugging
-  
-      try {
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(registerData),
-        });
-  
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`Server error: ${response.status}, ${errorText}`);
+        e.preventDefault();
+    
+        const userData = {
+          email,
+          password,
+        };
+    
+        try {
+          const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+          });
+    
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Server error: ${response.status}, ${errorText}`);
+          }
+    
+          const data = await response.json();
+          toast.success('Registration successful!');
+    
+          // Redirect to login page after successful registration
+          navigate('/');
+        } catch (error) {
+          console.error('Registration error:', error);
+          toast.error('Failed to register. Please try again.');
         }
-  
-        // Assuming the response contains a token or user info
-        const data = await response.json();
-        console.log('Login successful:', data);
-  
-        // Optionally save token/user info to localStorage or context
-        // localStorage.setItem('token', data.token);
-  
-        toast.success('Registered successful!');
-        navigate('/homepage'); // Redirect user to the homepage after successful login
-      } catch (error) {
-        console.log('Register error:', error);
-        toast.error('Failed to register.');
-      }
-    };
+      };
     return (
         <>
             <section className='bg-indigo-50'>
