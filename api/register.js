@@ -1,7 +1,7 @@
 // /api/register.js
-import { Client } from 'pg';
+import pkg from 'pg';
 import bcrypt from 'bcrypt'; // To hash the password
-
+const { Client } = pkg;
 // Database connection
 const client = new Client({
   connectionString: process.env.DATABASE_URL, // Make sure your Vercel DB connection URL is set in the environment
