@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // For navigation
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -112,7 +112,7 @@ const LoginPage = () => {
                     </div>
                 </div>
             </section>
-
+            <ToastContainer />
         </>
     );
 };
