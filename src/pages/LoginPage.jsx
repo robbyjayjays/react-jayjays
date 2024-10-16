@@ -1,58 +1,41 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // For navigation
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    
-    const navigate = useNavigate(); // Assuming you're using React Router for navigation
-  
-    const submitForm = async (e) => {
-      e.preventDefault();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-      const location = useLocation(); // Get the state passed from the RegisterPage
+  const submitForm = async (e) => {
+    e.preventDefault();
 
-        // Show success toast if registration was successful
-        if (location.state?.registrationSuccess) {
-            toast.success('Registration successful! You can now log in.');
-        }
-      
-      const loginData = {
-        email,
-        password,
-      };
-  
-      console.log(loginData); // For debugging
-  
-      try {
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(loginData),
-        });
-  
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`Server error: ${response.status}, ${errorText}`);
-        }
-  
-        // Assuming the response contains a token or user info
-        const data = await response.json();
-        console.log('Login successful:', data);
-  
-        // Optionally save token/user info to localStorage or context
-        // localStorage.setItem('token', data.token);
-  
-        toast.success('Login successful!');
-        navigate('/homepage'); // Redirect user to the homepage after successful login
-      } catch (error) {
-        console.log('Login error:', error);
-        toast.error('Failed to login. Please check your credentials and try again.');
+    const userData = { email, password };
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Server error: ${response.status}, ${errorText}`);
       }
-    };
+
+      const data = await response.json();
+      toast.success('Login successful!');
+      
+      // Navigate to homepage after successful login
+      navigate('/homepage');
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error('Invalid credentials. Please try again.');
+    }
+  };
     return (
         <>
             <section className='bg-indigo-50'>

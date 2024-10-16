@@ -26,11 +26,11 @@ const App = () => {
       path: '/',
       element: <MainLayout />, // All other pages are wrapped by MainLayout
       children: [
-        { path: 'homepage', element: <HomePage isHome={true} /> },
-        { path: 'jobs', element: <JobsPage isHome={false} /> },
-        { path: 'add-job', element: <AddJobPage /> },
-        { path: 'edit-job/:id', element: <EditJobPage /> },
-        { path: 'job/:id', element: <JobPage /> },
+        { path: '/homepage', element: <HomePage isHome={true} /> },
+        { path: '/jobs', element: <JobsPage isHome={false} /> },
+        { path: '/add-job', element: <AddJobPage /> },
+        { path: '/edit-job/:id', element: <EditJobPage /> },
+        { path: '/job/:id', element: <JobPage /> },
         { path: '*', element: <NotFoundPage /> },
       ],
     },
