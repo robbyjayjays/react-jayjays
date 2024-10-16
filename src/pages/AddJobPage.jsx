@@ -34,7 +34,7 @@ const AddJobPage = () => {
         console.log(newJob); // Debugging log
     
         try {
-            const response = await fetch('/api/jobs', {
+            const response = await fetch('/api/add-jobs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
