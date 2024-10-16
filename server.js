@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import pkg from 'pg'; // Import the entire 'pg' package
 const { Pool } = pkg; // Destructure Pool from the imported pg package
-
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.development.local' });
 const app = express();
 app.use(cors()); // Enable Cross-Origin Resource Sharing (CORS) for requests from your React frontend
 app.use(express.json()); // Middleware to parse JSON bodies
@@ -10,11 +11,14 @@ app.use(express.json()); // Middleware to parse JSON bodies
 
 // Set up the PostgreSQL connection
 const pool = new Pool({
-  user: 'postgres',       // Replace with your PostgreSQL username
-  host: 'localhost',          // Host of your PostgreSQL database
-  database: 'jayjays',        // Name of your PostgreSQL database
-  password: 'newpassword', // Your PostgreSQL password
-  port: 5433,                 // Default PostgreSQL port
+  user: process.env.POSTGRES_USER,       // Replace with your PostgreSQL username
+  host: process.env.POSTGRES_HOST,          // Host of your PostgreSQL database
+  database: process.env.POSTGRES_DATABASE,        // Name of your PostgreSQL database
+  password: process.env.POSTGRES_PASSWORD, // Your PostgreSQL password
+  port: process.env.PORT || 5432,                 // Default PostgreSQL port
+  ssl: {
+    rejectUnauthorized: false,  // This allows insecure SSL connections; adjust as necessary for production
+  }
 });
 
 // Check if the database connection is working
