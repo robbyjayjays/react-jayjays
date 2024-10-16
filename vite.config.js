@@ -5,7 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    historyApiFallback: true, // Add this line
     port: 3000,
     proxy: {
       '/api': {
