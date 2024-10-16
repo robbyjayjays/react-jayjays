@@ -16,7 +16,7 @@ const JobPage = () => {
     useEffect ( () => {
         const fetchJob = async () => {
             try {
-                const res = await fetch(`/api/jobs/${id}`);
+                const res = await fetch(`/api/get-job/${id}`);
                 const data = await res.json();
                 setJob(data);
             } catch (error) {
