@@ -15,7 +15,8 @@ const App = () => {
       path: '/',
       element: <MainLayout />,
       children: [
-        { index: true, element: <HomePage isHome={true}/> },
+        { index: true, element: <LoginPage /> },
+        { path: '/homepage', element: <HomePage isHome={true}/> },
         { path: '/jobs', element: <JobsPage isHome={false}/> },
         { path: '/add-job', element: <AddJobPage /> },
         { path: '/edit-job/:id', element: <EditJobPage /> },
