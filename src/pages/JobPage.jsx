@@ -13,29 +13,21 @@ const JobPage = () => {
     const [job, setJob] =useState(null);
     const [loading, setLoading ] = useState(true);
 
-    useEffect(() => {
+    useEffect ( () => {
         const fetchJob = async () => {
-          try {
-            const res = await fetch(`/api/get-job/${id}`);
-            if (!res.ok) {
-              throw new Error(`Failed to fetch job with id ${id}`);
+            try {
+                const res = await fetch(`/api/get-job/${id}`);
+                const data = await res.json();
+                setJob(data);
+            } catch (error) {
+                console.log('Error fetching data', error);
+            } finally {
+                setLoading(false);
             }
-            const data = await res.json();
-            setJob(data);  // Set the fetched job data
-          } catch (error) {
-            setError(error.message);  // Set error message if fetch fails
-          } finally {
-            setLoading(false);  // Loading is complete
-          }
-        };
-    
-        fetchJob();
-    }, [id]);
+        }
 
-    // Display a loading message or spinner while the job is being fetched
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+        fetchJob();
+    }, [id])
     
     const navigate = useNavigate();
 
