@@ -1,6 +1,49 @@
 import React from 'react'
 
-const HomePage = () => {
+const LoginPage = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
+    const navigate = useNavigate(); // Assuming you're using React Router for navigation
+  
+    const submitForm = async (e) => {
+      e.preventDefault();
+      
+      const loginData = {
+        email,
+        password,
+      };
+  
+      console.log(loginData); // For debugging
+  
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginData),
+        });
+  
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Server error: ${response.status}, ${errorText}`);
+        }
+  
+        // Assuming the response contains a token or user info
+        const data = await response.json();
+        console.log('Login successful:', data);
+  
+        // Optionally save token/user info to localStorage or context
+        // localStorage.setItem('token', data.token);
+  
+        toast.success('Login successful!');
+        navigate('/homepage'); // Redirect user to the homepage after successful login
+      } catch (error) {
+        console.log('Login error:', error);
+        toast.error('Failed to login. Please check your credentials and try again.');
+      }
+    };
     return (
         <>
             <section className='bg-indigo-50'>
@@ -64,4 +107,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage
+export default LoginPage
