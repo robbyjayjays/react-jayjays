@@ -14,14 +14,18 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <MainLayout />,
+      element: <LoginPage />, // The LoginPage is separate, not wrapped by MainLayout
+      index: true,
+    },
+    {
+      path: '/',
+      element: <MainLayout />, // All other pages are wrapped by MainLayout
       children: [
-        { index: true, element: <LoginPage /> },
-        { path: '/homepage', element: <HomePage isHome={true}/> },
-        { path: '/jobs', element: <JobsPage isHome={false}/> },
-        { path: '/add-job', element: <AddJobPage /> },
-        { path: '/edit-job/:id', element: <EditJobPage /> },
-        { path: '/job/:id', element: <JobPage /> },
+        { path: 'homepage', element: <HomePage isHome={true} /> },
+        { path: 'jobs', element: <JobsPage isHome={false} /> },
+        { path: 'add-job', element: <AddJobPage /> },
+        { path: 'edit-job/:id', element: <EditJobPage /> },
+        { path: 'job/:id', element: <JobPage /> },
         { path: '*', element: <NotFoundPage /> },
       ],
     },
