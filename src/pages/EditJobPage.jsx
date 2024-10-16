@@ -75,7 +75,7 @@ const EditJobPage = ({ updateJobSubmit }) => {
             }
 
             toast.success('Job Updated Successfully');
-            navigate(`/get-job/${id}`); // Navigate back to job details page after updating
+            navigate(`./get-job/${id}`); // Navigate back to job details page after updating
         } catch (error) {
             console.log('Error updating job', error);
             toast.error('Failed to update job. Please try again.');
