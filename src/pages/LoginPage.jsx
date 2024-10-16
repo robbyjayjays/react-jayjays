@@ -10,6 +10,13 @@ const LoginPage = () => {
   
     const submitForm = async (e) => {
       e.preventDefault();
+
+      const location = useLocation(); // Get the state passed from the RegisterPage
+
+        // Show success toast if registration was successful
+        if (location.state?.registrationSuccess) {
+            toast.success('Registration successful! You can now log in.');
+        }
       
       const loginData = {
         email,

@@ -34,7 +34,7 @@ const RegisterPage = () => {
           toast.success('Registration successful!');
     
           // Redirect to login page after successful registration
-          navigate('/');
+          navigate('/', { state: { registrationSuccess: true } });
         } catch (error) {
           console.error('Registration error:', error);
           toast.error('Failed to register. Please try again.');
