@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // For navigation
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const RegisterPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
@@ -12,12 +11,12 @@ const LoginPage = () => {
     const submitForm = async (e) => {
       e.preventDefault();
       
-      const loginData = {
+      const registerData = {
         email,
         password,
       };
   
-      console.log(loginData); // For debugging
+      console.log(registerData); // For debugging
   
       try {
         const response = await fetch('/api/login', {
@@ -25,7 +24,7 @@ const LoginPage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(loginData),
+          body: JSON.stringify(registerData),
         });
   
         if (!response.ok) {
@@ -40,11 +39,11 @@ const LoginPage = () => {
         // Optionally save token/user info to localStorage or context
         // localStorage.setItem('token', data.token);
   
-        toast.success('Login successful!');
+        toast.success('Registered successful!');
         navigate('/homepage'); // Redirect user to the homepage after successful login
       } catch (error) {
-        console.log('Login error:', error);
-        toast.error('Failed to login. Please check your credentials and try again.');
+        console.log('Register error:', error);
+        toast.error('Failed to register.');
       }
     };
     return (
@@ -53,7 +52,7 @@ const LoginPage = () => {
                 <div className='container m-auto max-w-md py-24'>
                     <div className='bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0'>
                     <form onSubmit={submitForm}>
-                        <h2 className='text-3xl text-center font-semibold mb-6'>Login</h2>
+                        <h2 className='text-3xl text-center font-semibold mb-6'>Register</h2>
 
                         <div className='mb-4'>
                         <label
@@ -95,16 +94,8 @@ const LoginPage = () => {
 
                         <div>
                         <button
-                            className='bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mb-4' // Added mb-4 here
-                            type='submit'
-                            >
-                            Login
-                        </button>
-
-                        <button
                             className='bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline'
-                            type='button'
-                            onClick={() => navigate('/register')}
+                            type='submit'
                             >
                             Register
                         </button>
@@ -118,4 +109,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage
+export default RegisterPage

@@ -7,6 +7,7 @@ import JobPage from './pages/JobPage';
 import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 const App = () => {
 
@@ -16,6 +17,10 @@ const App = () => {
       path: '/',
       element: <LoginPage />, // The LoginPage is separate, not wrapped by MainLayout
       index: true,
+    },
+    {
+      path: '/register',
+      element: <RegisterPage />, // Add the RegisterPage route here, also separate from MainLayout
     },
     {
       path: '/',
