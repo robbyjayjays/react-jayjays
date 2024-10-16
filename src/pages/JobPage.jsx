@@ -37,7 +37,7 @@ const JobPage = () => {
         if (!confirm) return;
 
         try {
-            const res = await fetch(`/api/jobs/${jobId}`, {
+            const res = await fetch(`/api/delete-job/${jobId}`, {
                 method: 'DELETE',
             });
 

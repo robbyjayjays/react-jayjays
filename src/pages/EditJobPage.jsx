@@ -21,7 +21,7 @@ const EditJobPage = ({ updateJobSubmit }) => {
     useEffect(() => {
         const fetchJob = async () => {
             try {
-                const res = await fetch(`/api/jobs/${id}`);
+                const res = await fetch(`/api/get-job/${id}`);
                 const data = await res.json();
                 
                 // Set job data into state variables
@@ -62,7 +62,7 @@ const EditJobPage = ({ updateJobSubmit }) => {
         };
 
         try {
-            const res = await fetch(`/api/jobs/${id}`, {
+            const res = await fetch(`/api/edit-jobs/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const EditJobPage = ({ updateJobSubmit }) => {
             }
 
             toast.success('Job Updated Successfully');
-            navigate(`/jobs/${id}`); // Navigate back to job details page after updating
+            navigate(`/get-job/${id}`); // Navigate back to job details page after updating
         } catch (error) {
             console.log('Error updating job', error);
             toast.error('Failed to update job. Please try again.');
