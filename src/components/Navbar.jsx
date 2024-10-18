@@ -42,7 +42,7 @@ const Navbar = () => {
                     >
                     </div>
                     <span className="text-white mr-4">
-                        {userEmail ? `Welcome, ${userEmail}` : ''}
+                        {userEmail ? `Welcome here, ${userEmail}` : ''}
                     </span> {/* Display user's email */}
                 </div>
                 </div>
