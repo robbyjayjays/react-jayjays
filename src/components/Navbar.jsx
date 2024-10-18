@@ -40,10 +40,12 @@ const Navbar = () => {
                         className={linkClass}
                         >Log Out</NavLink
                     >
+                    <NavLink
+                        to="/"
+                        className={linkClass}
+                        >{userEmail ? `${userEmail}` : ''}</NavLink
+                    >
                     </div>
-                    <span className="text-white mr-4">
-                        {userEmail ? `Welcome, ${userEmail}` : ''}
-                    </span> {/* Display user's email */}
                 </div>
                 </div>
             </div>
