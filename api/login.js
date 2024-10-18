@@ -1,6 +1,7 @@
 import pkg from 'pg';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken'; // Import jsonwebtoken
 
 dotenv.config(); // Load environment variables
 
@@ -41,10 +42,18 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
 
-      // On success, return user data (without password)
+      // Generate a JWT token
+      const token = jwt.sign(
+        { id: user.id, email: user.email }, // Payload
+        process.env.JWT_SECRET,             // Secret key from .env
+        { expiresIn: '1h' }                 // Expiry time (optional)
+      );
+
+      // On success, return the token and user data
       res.status(200).json({
         message: 'Login successful',
-        user: { id: user.id, email: user.email },
+        token, // Send the JWT token to the client
+        user: { id: user.id, email: user.email }, // You can return user data as well, if needed
       });
     } catch (error) {
       console.error('Error logging in:', error.message);
