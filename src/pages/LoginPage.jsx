@@ -30,7 +30,7 @@ const LoginPage = () => {
 
       // Store the JWT token in localStorage
       localStorage.setItem('token', data.token);
-      localStorage.setItem('email', data.email);
+      localStorage.setItem('email', data.user.email);
 
       toast.success('Login successful!');
 
