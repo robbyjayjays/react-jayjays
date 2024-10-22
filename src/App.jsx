@@ -8,6 +8,7 @@ import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import UserPage from './pages/UserPage';
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
         { path: '/add-job', element: <AddJobPage /> },
         { path: '/edit-job/:id', element: <EditJobPage /> },
         { path: '/job/:id', element: <JobPage /> },
+        { path: '/user', element: <UserPage /> },
         { path: '*', element: <NotFoundPage /> },
       ],
     },

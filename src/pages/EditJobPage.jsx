@@ -82,6 +82,15 @@ const EditJobPage = ({ updateJobSubmit }) => {
         }
     };
 
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+
+      // If no token is present, redirect to the login page
+      if (!token) {
+          navigate('/');  // Redirect to login if not authenticated
+      }
+    }, [navigate]);
+
     return (
         <section className='bg-indigo-50'>
       <div className='container m-auto max-w-2xl py-24'>

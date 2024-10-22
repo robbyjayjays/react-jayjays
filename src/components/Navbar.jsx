@@ -1,9 +1,21 @@
 import logo from '../assets/image/jayjays.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const linkClass = ({ isActive }) => isActive ? 'bg-black text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2' : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
     const userEmail = localStorage.getItem('email');
+
+    // Handle logout function
+    const handleLogout = () => {
+        // Remove token and any other user-related data
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+
+        // Redirect to the login page
+        navigate('/', { replace: true });
+    };
+
     return (
         <nav className="bg-indigo-700 border-b border-indigo-500">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -38,10 +50,11 @@ const Navbar = () => {
                     <NavLink
                         to="/"
                         className={linkClass}
+                        onClick={handleLogout}
                         >Log Out</NavLink
                     >
                     <NavLink
-                        to="/"
+                        to="/user"
                         className={linkClass}
                         >{userEmail ? `${userEmail}` : ''}</NavLink
                     >
