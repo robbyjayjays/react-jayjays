@@ -103,6 +103,16 @@ const LoginPage = () => {
                 >
                   Register
                 </button>
+
+                <p className='text-center'>
+                    <button
+                        className='text-indigo-500 hover:underline font-semibold'
+                        type='button'
+                        onClick={() => navigate('/forgot-password')}
+                    >
+                        Forgot Password?
+                    </button>
+                </p>
               </div>
             </form>
           </div>

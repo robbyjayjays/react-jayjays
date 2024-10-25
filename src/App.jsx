@@ -9,6 +9,7 @@ import EditJobPage from './pages/EditJobPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserPage from './pages/UserPage';
+import ForgotPassword from './pages/ForgotPassword';
 
 const App = () => {
 
@@ -22,6 +23,10 @@ const App = () => {
     {
       path: '/register',
       element: <RegisterPage />, // Add the RegisterPage route here, also separate from MainLayout
+    },
+    {
+      path: '/forgot-password',
+      element: <ForgotPassword />
     },
     {
       path: '/',
