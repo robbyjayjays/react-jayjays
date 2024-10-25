@@ -48,19 +48,20 @@ export default async function handler(req, res) {
       // Construct the reset password link
       const resetLink = `https://yourwebsite.com/reset-password?token=${resetToken}`;
 
-      // Configure the email transport
+      // Configure Nodemailer for SendGrid
       const transporter = nodemailer.createTransport({
-        service: 'YourEmailService', // Replace with your email service, e.g., 'gmail'
+        host: 'smtp.sendgrid.net',
+        port: 587,
         auth: {
-          user: process.env.EMAIL_USER, // Your email address
-          pass: process.env.EMAIL_PASSWORD, // Your email password
+          user: 'apikey', // SendGrid requires 'apikey' as the user
+          pass: process.env.SENDGRID_API_KEY, // Your SendGrid API Key
         },
       });
 
       // Email options
       const mailOptions = {
         to: user.email,
-        from: process.env.EMAIL_USER,
+        from: process.env.EMAIL_USER, // Sender email defined in your .env
         subject: 'Password Reset Request',
         text: `You requested a password reset. Click this link to reset your password: ${resetLink}`,
       };
