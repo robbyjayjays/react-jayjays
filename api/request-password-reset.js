@@ -46,7 +46,8 @@ export default async function handler(req, res) {
       );
 
       // Construct the reset password link
-      const resetLink = `https://yourwebsite.com/reset-password?token=${resetToken}`;
+      const resetLink = `https://react-jayjays.vercel.app/reset-password?token=${resetToken}`;
+
 
       // Configure Nodemailer for SendGrid
       const transporter = nodemailer.createTransport({
@@ -61,9 +62,25 @@ export default async function handler(req, res) {
       // Email options
       const mailOptions = {
         to: user.email,
-        from: process.env.EMAIL_USER, // Sender email defined in your .env
+        from: process.env.EMAIL_USER,
         subject: 'Password Reset Request',
         text: `You requested a password reset. Click this link to reset your password: ${resetLink}`,
+        headers: {
+          'X-SMTPAPI': JSON.stringify({
+            filters: {
+              clicktrack: {
+                settings: {
+                  enable: 0
+                }
+              },
+              opentrack: {
+                settings: {
+                  enable: 0
+                }
+              }
+            }
+          })
+        }
       };
 
       // Send the email

@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserPage from './pages/UserPage';
 import ForgotPassword from './pages/ForgotPassword';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 const App = () => {
 
@@ -27,6 +28,10 @@ const App = () => {
     {
       path: '/forgot-password',
       element: <ForgotPassword />
+    },
+    {
+      path: '/reset-password',
+      element: <ResetPasswordPage />
     },
     {
       path: '/',
