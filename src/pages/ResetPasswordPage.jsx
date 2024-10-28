@@ -1,48 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function ResetPasswordPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
   // Get token from the URL
-  useEffect(() => {
-    const query = new URLSearchParams(useLocation().search);
-    const tokenFromUrl = query.get('token');
-    
-    if (tokenFromUrl) {
-      console.log('Token found in URL:', tokenFromUrl); // Log token from URL
-      setToken(tokenFromUrl);
-    } else {
-      console.error('No token found in the URL');
-      toast.error('Invalid or missing token.');
-    }
-  }, []);
+  const query = new URLSearchParams(useLocation().search);
+  const token = query.get('token'); // assuming the token is passed as a query parameter
+
+  console.log(token)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if token is available
-    if (!token) {
-      console.error('Token is missing or invalid');
-      toast.error('Invalid or missing token.');
-      return;
-    }
-
     // Check if passwords match
     if (password !== confirmPassword) {
-      console.warn('Passwords do not match');
       toast.error('Passwords do not match');
       return;
     }
-
-    console.log('Submitting reset password request:', {
-      token,
-      password,
-    });
 
     try {
       const response = await fetch('/api/reset-password', {
@@ -52,18 +30,13 @@ function ResetPasswordPage() {
       });
 
       if (response.ok) {
-        console.log('Password reset successful');
         toast.success('Password reset successfully!');
         // Redirect to login or another page after a successful reset
         setTimeout(() => navigate('/'), 2000);
       } else {
-        console.error('Failed to reset password. Response status:', response.status);
-        const data = await response.json();
-        console.error('Error message from server:', data.error);
-        toast.error(data.error || 'Failed to reset password. The token may be invalid or expired.');
+        toast.error('Failed to reset password. The token may be invalid or expired.');
       }
     } catch (error) {
-      console.error('Error during password reset:', error);
       toast.error('An error occurred. Please try again later.');
     }
   };
