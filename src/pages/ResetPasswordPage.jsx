@@ -30,7 +30,7 @@ function ResetPasswordPage() {
       if (response.ok) {
         toast.success('Password reset successfully!');
         // Redirect to login or another page after a successful reset
-        setTimeout(() => navigate('/login'), 2000);
+        setTimeout(() => navigate('/'), 2000);
       } else {
         toast.error('Failed to reset password. The token may be invalid or expired.');
       }
